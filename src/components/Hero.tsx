@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 
@@ -84,7 +83,7 @@ const Hero = () => {
       {/* Yellow accent shape */}
       <div className="absolute bottom-0 left-0 right-0 h-[10vh] bg-azplumbing-yellow clip-path-diagonal"></div>
       
-      <style jsx>{`
+      <style>{`
         .clip-path-diagonal {
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
         }

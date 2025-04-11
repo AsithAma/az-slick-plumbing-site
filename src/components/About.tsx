@@ -1,6 +1,6 @@
 
 import { useEffect, useRef } from 'react';
-import { Award, Clock, Shield, Tool } from 'lucide-react';
+import { Award, Clock, Shield, Wrench } from 'lucide-react';
 
 interface FeatureItemProps {
   icon: React.ReactNode;
@@ -93,7 +93,7 @@ const About = () => {
       delay: 400
     },
     {
-      icon: <Tool size={24} />,
+      icon: <Wrench size={24} />,
       title: "Expert Technicians",
       description: "Our team of skilled professionals undergoes regular training to stay current with industry standards.",
       delay: 600
