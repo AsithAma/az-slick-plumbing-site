@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 60 86% 47%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -50,44 +51,6 @@
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 }
 
 @layer base {
@@ -95,7 +58,142 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg rounded-xl border border-white/20 shadow-xl;
+  }
+
+  .nav-link {
+    @apply relative text-azplumbing-blue font-medium transition-all duration-300 hover:text-azplumbing-yellow after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-azplumbing-yellow after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+
+  .nav-link.active {
+    @apply text-azplumbing-yellow after:scale-x-100;
+  }
+
+  .service-card {
+    @apply relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-service-card;
+  }
+
+  .service-card:after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(238, 225, 6, 0.2), transparent);
+    transform: rotate(30deg);
+    top: -100%;
+    left: -200%;
+    transition: all 0.7s ease;
+  }
+
+  .service-card:hover:after {
+    left: 100%;
+  }
+
+  .animate-on-scroll {
+    @apply opacity-0;
+  }
+
+  .animate-on-scroll.visible {
+    @apply animate-fade-in;
+  }
+
+  .reveal-right {
+    @apply translate-x-20 opacity-0 transition-all duration-1000;
+  }
+
+  .reveal-right.revealed {
+    @apply translate-x-0 opacity-100;
+  }
+
+  .reveal-left {
+    @apply -translate-x-20 opacity-0 transition-all duration-1000;
+  }
+
+  .reveal-left.revealed {
+    @apply translate-x-0 opacity-100;
+  }
+
+  .reveal-up {
+    @apply translate-y-20 opacity-0 transition-all duration-1000;
+  }
+
+  .reveal-up.revealed {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .gallery-item {
+    @apply overflow-hidden rounded-xl shadow-lg transition-all duration-500 hover:shadow-xl hover:scale-[1.02];
+  }
+
+  .gallery-item img {
+    @apply transition-all duration-700 hover:scale-110;
+  }
+
+  /* Custom animations */
+  .float-animation {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
+
+.hover-glow:hover {
+  filter: drop-shadow(0 0 8px rgba(238, 225, 6, 0.7));
+}
+
+.hero-text-gradient {
+  background: linear-gradient(90deg, #eee106, #f8d639, #eee106);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+/* Advanced button styles */
+.fancy-button {
+  @apply relative px-8 py-3 text-azplumbing-blue font-bold overflow-hidden rounded-lg transition-all duration-300 hover:text-white bg-azplumbing-yellow;
+}
+
+.fancy-button:before {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full bg-azplumbing-blue scale-x-0 origin-right transition-transform duration-300;
+  transform-origin: right;
+  z-index: -1;
+}
+
+.fancy-button:hover:before {
+  @apply scale-x-100;
+  transform-origin: left;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
   }
 }
