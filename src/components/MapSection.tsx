@@ -1,21 +1,59 @@
 
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 const MapSection = () => {
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Initialize Google Maps
+    const initMap = () => {
+      if (mapRef.current) {
+        // A-Z Heating & Plumbing location coordinates
+        const location = { lat: 51.5179, lng: -3.1925 }; // Cardiff coordinates
+        const mapOptions = {
+          center: location,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        // Create the map
+        const map = new google.maps.Map(mapRef.current, mapOptions);
+
+        // Add marker for A-Z Heating & Plumbing
+        new google.maps.Marker({
+          position: location,
+          map: map,
+          title: 'A-Z Heating & Plumbing'
+        });
+      }
+    };
+
+    // Load Google Maps API
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pyiVh9hyJzPmzXxLHMZI-QGTy56VtXA&callback=initGoogleMap`;
+    script.async = true;
+    script.defer = true;
+    window.initGoogleMap = initMap;
+    document.head.appendChild(script);
+
+    return () => {
+      // Clean up
+      delete window.initGoogleMap;
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <section className="relative py-12 md:py-0">
       <div className="grid grid-cols-1 md:grid-cols-2">
-        {/* Map Container - Using a Static Map Image */}
-        <div className="h-[400px] md:h-[600px] relative bg-[#333333] flex items-center justify-center">
-          <div className="w-full h-full relative overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center bg-[#2a2a2a]">
-              <div className="text-center p-6">
-                <MapPin size={40} className="text-azplumbing-yellow mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">A-Z Heating & Plumbing</h3>
-                <p className="text-gray-300">Heol Hir, Llanishen, Cardiff CF14 5AA, UK</p>
-              </div>
-            </div>
-          </div>
+        {/* Map Container */}
+        <div className="h-[400px] md:h-[600px] relative">
+          <div 
+            ref={mapRef} 
+            className="w-full h-full"
+            aria-label="Google Map showing A-Z Heating & Plumbing location"
+          ></div>
         </div>
 
         {/* Contact Information */}

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -10,9 +9,14 @@ import ContactUs from "@/components/ContactUs";
 import MapSection from "@/components/MapSection";
 import Footer from "@/components/Footer";
 
+declare global {
+  interface Window {
+    initGoogleMap: () => void;
+  }
+}
+
 const Index = () => {
   useEffect(() => {
-    // Initialize smooth scrolling and animation observers
     const handleScroll = () => {
       const revealElements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
       
@@ -48,7 +52,6 @@ const Index = () => {
       </main>
       <Footer />
       
-      {/* Back to top button */}
       <a 
         href="#home" 
         className="fixed bottom-8 right-8 bg-azplumbing-yellow text-azplumbing-blue p-3 rounded-full shadow-lg hover:bg-azplumbing-blue hover:text-azplumbing-yellow transition-all duration-300 z-20"
@@ -58,7 +61,6 @@ const Index = () => {
         </svg>
       </a>
       
-      {/* Script for animation observers */}
       <script dangerouslySetInnerHTML={{
         __html: `
           document.addEventListener('DOMContentLoaded', () => {
@@ -87,7 +89,6 @@ const Index = () => {
               handleScrollAnimation();
             });
             
-            // Run once to check for elements in view on page load
             handleScrollAnimation();
           });
         `
