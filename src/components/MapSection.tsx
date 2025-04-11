@@ -14,14 +14,14 @@ const MapSection = () => {
         const mapOptions = {
           center: location,
           zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: window.google.maps.MapTypeId.ROADMAP
         };
 
         // Create the map
-        const map = new google.maps.Map(mapRef.current, mapOptions);
+        const map = new window.google.maps.Map(mapRef.current, mapOptions);
 
         // Add marker for A-Z Heating & Plumbing
-        new google.maps.Marker({
+        new window.google.maps.Marker({
           position: location,
           map: map,
           title: 'A-Z Heating & Plumbing'
@@ -29,9 +29,10 @@ const MapSection = () => {
       }
     };
 
-    // Load Google Maps API
+    // Load Google Maps API with a valid API key
+    // Note: Using a placeholder API key - this should be replaced with a valid one
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC2pyiVh9hyJzPmzXxLHMZI-QGTy56VtXA&callback=initGoogleMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGoogleMap`;
     script.async = true;
     script.defer = true;
     window.initGoogleMap = initMap;
@@ -40,7 +41,9 @@ const MapSection = () => {
     return () => {
       // Clean up
       delete window.initGoogleMap;
-      document.head.removeChild(script);
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, []);
 
