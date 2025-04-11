@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -174,7 +175,7 @@
 }
 
 .fancy-button {
-  @apply relative px-8 py-3 text-azplumbing-blue font-bold overflow-hidden rounded-lg transition-all duration-300 hover:text-white bg-azplumbing-yellow;
+  @apply relative px-8 py-3 text-azplumbing-blue font-bold overflow-hidden rounded-lg transition-all duration-300 hover:text-[#888888] bg-azplumbing-yellow;
 }
 
 .fancy-button:before {

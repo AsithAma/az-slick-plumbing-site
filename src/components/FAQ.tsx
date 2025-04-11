@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 interface FAQItemProps {
@@ -7,56 +7,26 @@ interface FAQItemProps {
   answer: string;
   isOpen: boolean;
   onClick: () => void;
-  delay: number;
 }
 
-const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => {
-  const itemRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            itemRef.current?.classList.add('revealed');
-          }, delay);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (itemRef.current) {
-      observer.observe(itemRef.current);
-    }
-
-    return () => {
-      if (itemRef.current) {
-        observer.unobserve(itemRef.current);
-      }
-    };
-  }, [delay]);
-
+const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => {
   return (
-    <div 
-      ref={itemRef} 
-      className={`border-b border-gray-200 last:border-0 reveal-right ${isOpen ? 'pb-6' : 'pb-0'}`}
-    >
+    <div className="border-b border-gray-600 last:border-0">
       <button
         className="w-full text-left py-6 flex justify-between items-center focus:outline-none"
         onClick={onClick}
       >
-        <h3 className="text-lg font-semibold text-azplumbing-blue">{question}</h3>
+        <h3 className="text-lg font-semibold text-azplumbing-yellow">{question}</h3>
         <ChevronDown
           className={`w-5 h-5 text-azplumbing-yellow transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
         />
       </button>
       <div
-        className={`transition-all duration-300 ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`overflow-hidden transition-all duration-300 ${
+          isOpen ? 'max-h-96 opacity-100 pb-6' : 'max-h-0 opacity-0'
         }`}
-        style={{ overflow: 'hidden' }}
       >
-        <p className="text-azplumbing-darkgray pr-8">{answer}</p>
+        <p className="text-white pr-8">{answer}</p>
       </div>
     </div>
   );
@@ -64,9 +34,6 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0); // First FAQ open by default
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const testimonialRef = useRef<HTMLDivElement>(null);
 
   const faqItems = [
     {
@@ -95,41 +62,11 @@ const FAQ = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (titleRef.current) {
-            titleRef.current.classList.add('revealed');
-          }
-          if (testimonialRef.current) {
-            setTimeout(() => {
-              testimonialRef.current?.classList.add('revealed');
-            }, 300);
-          }
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (titleRef.current) {
-      observer.observe(titleRef.current);
-    }
-    if (testimonialRef.current) {
-      observer.observe(testimonialRef.current);
-    }
-
-    return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
-      if (testimonialRef.current) observer.unobserve(testimonialRef.current);
-    };
-  }, []);
-
   return (
-    <section id="faq" ref={sectionRef} className="py-20 bg-[#202020] relative overflow-hidden text-white">
+    <section id="faq" className="py-20 bg-[#202020] relative overflow-hidden text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-white reveal-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
             Frequently Asked <span className="text-azplumbing-yellow">Questions</span>
           </h2>
           <div className="w-24 h-1 bg-azplumbing-yellow mx-auto mt-4"></div>
@@ -143,15 +80,13 @@ const FAQ = () => {
               answer={item.answer}
               isOpen={openIndex === index}
               onClick={() => toggleFAQ(index)}
-              delay={index * 150}
             />
           ))}
         </div>
 
         {/* Testimonial */}
         <div 
-          ref={testimonialRef}
-          className="mt-20 max-w-2xl mx-auto bg-[#2a2a2a] rounded-2xl shadow-service-card p-8 relative reveal-up"
+          className="mt-20 max-w-2xl mx-auto bg-[#2a2a2a] rounded-2xl shadow-service-card p-8 relative"
         >
           <div className="absolute -top-6 left-10 text-7xl text-azplumbing-yellow opacity-30">"</div>
           <blockquote className="relative z-10">
