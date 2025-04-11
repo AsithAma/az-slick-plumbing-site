@@ -86,14 +86,14 @@ const Gallery = () => {
   }, [selectedImage]);
 
   return (
-    <section id="gallery" ref={sectionRef} className="py-20 bg-white">
+    <section id="gallery" ref={sectionRef} className="py-20 bg-[#202020] text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-azplumbing-blue reveal-up">
+          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-white reveal-up">
             Our <span className="text-azplumbing-yellow">Gallery</span>
           </h2>
           <div className="w-24 h-1 bg-azplumbing-yellow mx-auto mt-4"></div>
-          <p className="mt-4 text-lg text-azplumbing-darkgray max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
             Explore our portfolio of completed bathroom renovations and other plumbing projects.
           </p>
         </div>
@@ -110,6 +110,10 @@ const Gallery = () => {
                 alt={`Bathroom project ${index + 1}`}
                 className="w-full h-64 object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  console.error(`Failed to load image: ${src}`);
+                  (e.target as HTMLImageElement).src = "https://placehold.co/600x400?text=Image+Not+Found";
+                }}
               />
             </div>
           ))}
@@ -138,6 +142,9 @@ const Gallery = () => {
               src={images[selectedImage]}
               alt={`Bathroom project ${selectedImage + 1}`}
               className="max-h-[80vh] max-w-[80vw] object-contain"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://placehold.co/600x400?text=Image+Not+Found";
+              }}
             />
           </div>
           
@@ -153,26 +160,6 @@ const Gallery = () => {
           </div>
         </div>
       )}
-
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('visible');
-                }
-              });
-            }, { threshold: 0.1 });
-            
-            animatedElements.forEach((el) => {
-              observer.observe(el);
-            });
-          });
-        `
-      }} />
     </section>
   );
 };

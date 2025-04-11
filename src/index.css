@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 13%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -63,7 +62,7 @@
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-[#202020] text-foreground overflow-x-hidden;
     font-feature-settings: "ss01", "ss02";
   }
 
@@ -143,7 +142,6 @@
     @apply transition-all duration-700 hover:scale-110;
   }
 
-  /* Custom animations */
   .float-animation {
     animation: float 4s ease-in-out infinite;
   }
@@ -175,7 +173,6 @@
   animation: shine 5s linear infinite;
 }
 
-/* Advanced button styles */
 .fancy-button {
   @apply relative px-8 py-3 text-azplumbing-blue font-bold overflow-hidden rounded-lg transition-all duration-300 hover:text-white bg-azplumbing-yellow;
 }

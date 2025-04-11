@@ -51,9 +51,10 @@ const FAQItem = ({ question, answer, isOpen, onClick, delay }: FAQItemProps) => 
         />
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ${
+        className={`transition-all duration-300 ${
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
+        style={{ overflow: 'hidden' }}
       >
         <p className="text-azplumbing-darkgray pr-8">{answer}</p>
       </div>
@@ -125,10 +126,10 @@ const FAQ = () => {
   }, []);
 
   return (
-    <section id="faq" ref={sectionRef} className="py-20 bg-white relative overflow-hidden">
+    <section id="faq" ref={sectionRef} className="py-20 bg-[#202020] relative overflow-hidden text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-azplumbing-blue reveal-up">
+          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-white reveal-up">
             Frequently Asked <span className="text-azplumbing-yellow">Questions</span>
           </h2>
           <div className="w-24 h-1 bg-azplumbing-yellow mx-auto mt-4"></div>
@@ -150,11 +151,11 @@ const FAQ = () => {
         {/* Testimonial */}
         <div 
           ref={testimonialRef}
-          className="mt-20 max-w-2xl mx-auto bg-white rounded-2xl shadow-service-card p-8 relative reveal-up"
+          className="mt-20 max-w-2xl mx-auto bg-[#2a2a2a] rounded-2xl shadow-service-card p-8 relative reveal-up"
         >
           <div className="absolute -top-6 left-10 text-7xl text-azplumbing-yellow opacity-30">"</div>
           <blockquote className="relative z-10">
-            <p className="text-lg italic text-azplumbing-blue mb-4">
+            <p className="text-lg italic text-white mb-4">
               "Great service from A-Z Heating and Plumbing. Came out promptly when requested, on time, courteous and efficient. Serviced boiler and relinked Hive. Good value, great response. Would definitely recommend this service."
             </p>
             <footer className="text-right">
