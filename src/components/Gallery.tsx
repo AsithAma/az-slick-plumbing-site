@@ -196,23 +196,6 @@ const Gallery = () => {
             </div>
           ))}
         </div>
-
-        {import.meta.env.DEV && (
-          <div className="mt-8 p-4 bg-gray-800 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">Debug Info</h3>
-            <p>Images array length: {images.length}</p>
-            <p>Images loaded: {imagesLoaded}/{images.length}</p>
-            <p>Images with errors: {Object.keys(imageErrors).length}</p>
-            <p>Image paths:</p>
-            <div className="text-xs overflow-x-auto max-h-40 bg-gray-900 p-2 rounded">
-              {images.map((src, i) => (
-                <div key={i} className="mb-1">
-                  {i + 1}: {src} {imageErrors[i] ? '(Error loading - using fallback)' : ''}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Lightbox */}
