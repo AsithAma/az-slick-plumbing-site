@@ -41,7 +41,7 @@ const FeatureItem = ({ icon, title, description, delay }: FeatureItemProps) => {
         {icon}
       </div>
       <div>
-        <h3 className="text-lg font-semibold text-azplumbing-blue mb-1">{title}</h3>
+        <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
         <p className="text-azplumbing-darkgray">{description}</p>
       </div>
     </div>
@@ -110,11 +110,12 @@ const About = () => {
     <section 
       id="about" 
       ref={sectionRef} 
-      className="py-20 bg-azplumbing-gray/30"
+      // className="py-20 bg-azplumbing-gray/30"
+      className="py-20 bg-[#10131A]"
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-azplumbing-blue reveal-up">
+          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-white reveal-up">
             About <span className="text-azplumbing-yellow">Us</span>
           </h2>
           <div className="w-24 h-1 bg-azplumbing-yellow mx-auto mt-4"></div>
@@ -123,13 +124,13 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Company Description */}
           <div ref={contentRef} className="reveal-right">
-            <p className="text-lg mb-6 leading-relaxed">
+            <p className="text-xl text-white mb-6 leading-relaxed ">
               A-Z Heating & Plumbing based in Cardiff, South Wales is a business with over 20 years of experience in the plumbing industry. We take pride in delivering top-notch service and customer satisfaction.
             </p>
-            <p className="text-lg mb-6 leading-relaxed">
+            <p className="text-xl text-white mb-6 leading-relaxed">
               Our team of skilled plumbers undergoes regular training to stay up-to-date with the latest industry trends and techniques. We are fully licensed and insured for your peace of mind.
             </p>
-            <p className="text-lg mb-6 leading-relaxed">
+            <p className="text-xl text-white mb-6 leading-relaxed">
               Whether you have a minor plumbing issue or a major installation project, we are here to help. Contact us today for reliable and affordable heating and plumbing services.
             </p>
           </div>

@@ -70,7 +70,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll down indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-light">
+      <div className="absolute bottom-10 w-full flex justify-center animate-bounce-light">
         <a 
           href="#services" 
           className="flex flex-col items-center text-white hover:text-azplumbing-yellow transition-colors duration-300"
