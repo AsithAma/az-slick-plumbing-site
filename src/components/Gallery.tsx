@@ -6,6 +6,7 @@ const Gallery = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
   const images = [
     "/lovable-uploads/be3cec78-1c3d-4792-b317-ca4582abe649.png",
@@ -85,6 +86,11 @@ const Gallery = () => {
     };
   }, [selectedImage]);
 
+  const handleImageError = (index: number) => {
+    console.error(`Failed to load image: ${images[index]}`);
+    setImageErrors(prev => ({ ...prev, [index]: true }));
+  };
+
   return (
     <section id="gallery" ref={sectionRef} className="py-20 bg-[#202020] text-white">
       <div className="container mx-auto px-4">
@@ -102,22 +108,41 @@ const Gallery = () => {
           {images.map((src, index) => (
             <div
               key={index}
-              className="gallery-item animate-on-scroll cursor-pointer"
+              className="gallery-item animate-on-scroll cursor-pointer border border-gray-700 rounded-xl overflow-hidden"
               onClick={() => openLightbox(index)}
             >
-              <img
-                src={src}
-                alt={`Bathroom project ${index + 1}`}
-                className="w-full h-64 object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  console.error(`Failed to load image: ${src}`);
-                  (e.target as HTMLImageElement).src = "https://placehold.co/600x400?text=Image+Not+Found";
-                }}
-              />
+              {imageErrors[index] ? (
+                <div className="w-full h-64 bg-gray-800 flex items-center justify-center">
+                  <p className="text-gray-400 text-sm">Image not available</p>
+                </div>
+              ) : (
+                <img
+                  src={src}
+                  alt={`Bathroom project ${index + 1}`}
+                  className="w-full h-64 object-cover"
+                  loading="lazy"
+                  onError={() => handleImageError(index)}
+                />
+              )}
             </div>
           ))}
         </div>
+
+        {/* Add debug information in development mode */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="mt-8 p-4 bg-gray-800 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">Debug Info</h3>
+            <p>Images array length: {images.length}</p>
+            <p>Image paths:</p>
+            <ul className="text-xs overflow-x-auto max-h-40 bg-gray-900 p-2 rounded">
+              {images.map((src, i) => (
+                <li key={i} className="mb-1">
+                  {i + 1}: {src} {imageErrors[i] ? '(Error loading)' : ''}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -138,14 +163,18 @@ const Gallery = () => {
           </button>
           
           <div className="max-h-[80vh] max-w-[80vw]">
-            <img
-              src={images[selectedImage]}
-              alt={`Bathroom project ${selectedImage + 1}`}
-              className="max-h-[80vh] max-w-[80vw] object-contain"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://placehold.co/600x400?text=Image+Not+Found";
-              }}
-            />
+            {imageErrors[selectedImage] ? (
+              <div className="h-[60vh] w-[60vw] bg-gray-800 flex items-center justify-center">
+                <p className="text-gray-400">Image not available</p>
+              </div>
+            ) : (
+              <img
+                src={images[selectedImage]}
+                alt={`Bathroom project ${selectedImage + 1}`}
+                className="max-h-[80vh] max-w-[80vw] object-contain"
+                onError={() => handleImageError(selectedImage)}
+              />
+            )}
           </div>
           
           <button
