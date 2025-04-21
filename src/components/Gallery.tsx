@@ -8,6 +8,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
   const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const images = [
     "/lovable-uploads/be3cec78-1c3d-4792-b317-ca4582abe649.png",
@@ -44,17 +45,27 @@ const Gallery = () => {
     // Preload all images before rendering
     const preloadAllImages = () => {
       console.log("Preloading gallery images...");
+      let loadedCount = 0;
       
       // Preload original images
       images.forEach((src, index) => {
         const img = new Image();
         img.onload = () => {
           console.log(`Loaded image ${index + 1}/${images.length}: ${src}`);
-          setImagesLoaded(prev => prev + 1);
+          loadedCount++;
+          setImagesLoaded(loadedCount);
+          if (loadedCount >= images.length) {
+            setLoading(false);
+          }
         };
         img.onerror = () => {
           console.error(`Failed to load image ${index + 1}/${images.length}: ${src}`);
           setImageErrors(prev => ({ ...prev, [index]: true }));
+          loadedCount++;
+          setImagesLoaded(loadedCount);
+          if (loadedCount >= images.length) {
+            setLoading(false);
+          }
           
           // Try to load fallback image
           const fallbackImg = new Image();
@@ -64,7 +75,7 @@ const Gallery = () => {
       });
       
       // Preload fallback images
-      fallbackImages.forEach((src, index) => {
+      fallbackImages.forEach((src) => {
         const img = new Image();
         img.src = src;
       });
@@ -151,18 +162,18 @@ const Gallery = () => {
           </p>
         </div>
 
-        {imagesLoaded < 3 && (
+        {loading && (
           <div className="flex justify-center items-center my-8">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-azplumbing-yellow"></div>
-            <p className="ml-4 text-azplumbing-yellow">Loading gallery...</p>
+            <p className="ml-4 text-azplumbing-yellow">Loading gallery ({imagesLoaded}/{images.length})...</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ${loading ? 'opacity-50' : 'opacity-100'}`}>
           {images.map((src, index) => (
             <div
               key={index}
-              className="gallery-item animate-on-scroll cursor-pointer border border-gray-700 rounded-xl overflow-hidden"
+              className="gallery-item animate-on-scroll cursor-pointer border border-gray-700 rounded-xl overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-azplumbing-yellow/20"
               onClick={() => openLightbox(index)}
             >
               <img
@@ -176,7 +187,7 @@ const Gallery = () => {
           ))}
         </div>
 
-        {process.env.NODE_ENV !== 'production' && (
+        {import.meta.env.DEV && (
           <div className="mt-8 p-4 bg-gray-800 rounded-lg">
             <h3 className="text-xl font-semibold mb-2">Debug Info</h3>
             <p>Images array length: {images.length}</p>
