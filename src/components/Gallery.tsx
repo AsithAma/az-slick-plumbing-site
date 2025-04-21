@@ -1,14 +1,9 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const Gallery = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const [loading, setLoading] = useState(true);
 
   const images = [
     "/lovable-uploads/be3cec78-1c3d-4792-b317-ca4582abe649.png",
@@ -24,85 +19,6 @@ const Gallery = () => {
     "/lovable-uploads/e6747307-a130-4390-9729-b533b962e66c.png",
     "/lovable-uploads/025eb597-dc1b-4d01-8a54-738f77eeb1bd.png"
   ];
-
-  // Reliable fallback images from Unsplash (plumbing/bathroom related)
-  const fallbackImages = [
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1523772354886-34a1dc2f72e7?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1606341799659-708ebe896249?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1594731884638-8197c3102d1d?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1595514535261-f9d397b84a2c?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1613545325268-9265e1609167?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1536714545872-6da8056a4130?w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1584622781880-a5d06f57686a?w=800&auto=format&fit=crop"
-  ];
-
-  useEffect(() => {
-    // Preload all images before rendering
-    const preloadAllImages = () => {
-      console.log("Preloading gallery images...");
-      let loadedCount = 0;
-      
-      // Preload original images
-      images.forEach((src, index) => {
-        const img = new Image();
-        img.onload = () => {
-          console.log(`Loaded image ${index + 1}/${images.length}: ${src}`);
-          loadedCount++;
-          setImagesLoaded(loadedCount);
-          if (loadedCount >= images.length) {
-            setLoading(false);
-          }
-        };
-        img.onerror = () => {
-          console.error(`Failed to load image ${index + 1}/${images.length}: ${src}`);
-          setImageErrors(prev => ({ ...prev, [index]: true }));
-          loadedCount++;
-          setImagesLoaded(loadedCount);
-          // Even if there's an error, we count it as "loaded" for the progress indicator
-          if (loadedCount >= images.length) {
-            setLoading(false);
-          }
-          
-          // Try to load fallback image
-          const fallbackImg = new Image();
-          fallbackImg.src = fallbackImages[index % fallbackImages.length];
-        };
-        img.src = src;
-      });
-      
-      // Preload fallback images too
-      fallbackImages.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-      });
-    };
-    
-    preloadAllImages();
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          titleRef.current?.classList.add('revealed');
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (titleRef.current) {
-      observer.observe(titleRef.current);
-    }
-
-    return () => {
-      if (titleRef.current) {
-        observer.unobserve(titleRef.current);
-      }
-    };
-  }, []);
 
   const openLightbox = (index: number) => {
     setSelectedImage(index);
@@ -127,34 +43,11 @@ const Gallery = () => {
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedImage === null) return;
-      
-      if (e.key === 'Escape') {
-        closeLightbox();
-      } else if (e.key === 'ArrowRight') {
-        navigateImage(1);
-      } else if (e.key === 'ArrowLeft') {
-        navigateImage(-1);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [selectedImage]);
-
-  const getImageSrc = (index: number) => {
-    return imageErrors[index] ? fallbackImages[index % fallbackImages.length] : images[index];
-  };
-
   return (
-    <section id="gallery" ref={sectionRef} className="py-20 bg-[#202020] text-white">
+    <section id="gallery" className="py-20 bg-[#202020] text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-white reveal-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
             Our <span className="text-azplumbing-yellow">Gallery</span>
           </h2>
           <div className="w-24 h-1 bg-azplumbing-yellow mx-auto mt-4"></div>
@@ -163,47 +56,28 @@ const Gallery = () => {
           </p>
         </div>
 
-        {loading && (
-          <div className="flex justify-center items-center my-8">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-azplumbing-yellow"></div>
-            <p className="ml-4 text-azplumbing-yellow">
-              Loading gallery ({imagesLoaded}/{images.length})...
-            </p>
-          </div>
-        )}
-
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ${loading ? 'opacity-50' : 'opacity-100'} transition-opacity duration-300`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {images.map((src, index) => (
             <div
               key={index}
-              className="gallery-item animate-on-scroll cursor-pointer border border-gray-700 rounded-xl overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-azplumbing-yellow/20"
+              className="cursor-pointer border border-gray-700 rounded-xl overflow-hidden transform transition-transform duration-300 hover:scale-105"
               onClick={() => openLightbox(index)}
             >
-              <div className="relative w-full h-64">
-                <img
-                  src={getImageSrc(index)}
-                  alt={`Bathroom project ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  onError={() => setImageErrors(prev => ({ ...prev, [index]: true }))}
-                />
-                {imageErrors[index] && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1">
-                    Using fallback image
-                  </div>
-                )}
-              </div>
+              <img
+                src={src}
+                alt={`Bathroom project ${index + 1}`}
+                className="w-full h-64 object-cover"
+              />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
       {selectedImage !== null && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 text-white hover:text-azplumbing-yellow p-2 z-50"
+            className="absolute top-4 right-4 text-white hover:text-azplumbing-yellow p-2"
           >
             <X size={32} />
           </button>
@@ -215,14 +89,11 @@ const Gallery = () => {
             <ChevronLeft size={40} />
           </button>
           
-          <div className="max-h-[80vh] max-w-[80vw]">
-            <img
-              src={getImageSrc(selectedImage)}
-              alt={`Bathroom project ${selectedImage + 1}`}
-              className="max-h-[80vh] max-w-[80vw] object-contain"
-              onError={() => setImageErrors(prev => ({ ...prev, [selectedImage]: true }))}
-            />
-          </div>
+          <img
+            src={images[selectedImage]}
+            alt={`Bathroom project ${selectedImage + 1}`}
+            className="max-h-[80vh] max-w-[80vw] object-contain"
+          />
           
           <button
             onClick={() => navigateImage(1)}
