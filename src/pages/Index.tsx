@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -9,7 +8,7 @@ import Gallery from "@/components/Gallery";
 import ContactUs from "@/components/ContactUs";
 import MapSection from "@/components/MapSection";
 import Footer from "@/components/Footer";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/hooks/use-toast";
 
 declare global {
   interface Window {
@@ -45,7 +44,8 @@ const Index = () => {
           
           // Only show toast for critical errors
           if (errorCount === 1) {
-            toast("Some images failed to load", {
+            toast({
+              title: "Some images failed to load",
               description: "We're using fallback images instead.",
               duration: 5000,
             });
