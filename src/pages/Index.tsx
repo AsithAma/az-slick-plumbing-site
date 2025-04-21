@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -93,6 +92,7 @@ const Index = () => {
       </main>
       <Footer />
       
+      {/* Back to top button */}
       <a 
         href="#home" 
         className="fixed bottom-8 right-8 bg-azplumbing-yellow text-azplumbing-blue p-3 rounded-full shadow-lg hover:bg-azplumbing-blue hover:text-azplumbing-yellow transition-all duration-300 z-20"

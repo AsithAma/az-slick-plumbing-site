@@ -25,7 +25,7 @@ const Gallery = () => {
     "/lovable-uploads/025eb597-dc1b-4d01-8a54-738f77eeb1bd.png"
   ];
 
-  // Fallback images from Unsplash (plumbing/bathroom related)
+  // Reliable fallback images from Unsplash (plumbing/bathroom related)
   const fallbackImages = [
     "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1523772354886-34a1dc2f72e7?w=800&auto=format&fit=crop",
@@ -63,6 +63,7 @@ const Gallery = () => {
           setImageErrors(prev => ({ ...prev, [index]: true }));
           loadedCount++;
           setImagesLoaded(loadedCount);
+          // Even if there's an error, we count it as "loaded" for the progress indicator
           if (loadedCount >= images.length) {
             setLoading(false);
           }
@@ -74,7 +75,7 @@ const Gallery = () => {
         img.src = src;
       });
       
-      // Preload fallback images
+      // Preload fallback images too
       fallbackImages.forEach((src) => {
         const img = new Image();
         img.src = src;
@@ -165,24 +166,33 @@ const Gallery = () => {
         {loading && (
           <div className="flex justify-center items-center my-8">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-azplumbing-yellow"></div>
-            <p className="ml-4 text-azplumbing-yellow">Loading gallery ({imagesLoaded}/{images.length})...</p>
+            <p className="ml-4 text-azplumbing-yellow">
+              Loading gallery ({imagesLoaded}/{images.length})...
+            </p>
           </div>
         )}
 
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ${loading ? 'opacity-50' : 'opacity-100'}`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ${loading ? 'opacity-50' : 'opacity-100'} transition-opacity duration-300`}>
           {images.map((src, index) => (
             <div
               key={index}
               className="gallery-item animate-on-scroll cursor-pointer border border-gray-700 rounded-xl overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-azplumbing-yellow/20"
               onClick={() => openLightbox(index)}
             >
-              <img
-                src={getImageSrc(index)}
-                alt={`Bathroom project ${index + 1}`}
-                className="w-full h-64 object-cover"
-                loading="lazy"
-                onError={() => setImageErrors(prev => ({ ...prev, [index]: true }))}
-              />
+              <div className="relative w-full h-64">
+                <img
+                  src={getImageSrc(index)}
+                  alt={`Bathroom project ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onError={() => setImageErrors(prev => ({ ...prev, [index]: true }))}
+                />
+                {imageErrors[index] && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1">
+                    Using fallback image
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
