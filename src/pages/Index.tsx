@@ -25,8 +25,8 @@ const Index = () => {
       // We'll let the Gallery component handle its own preloading
       // This is just for critical above-the-fold images
       const criticalImages = [
-        "/lovable-uploads/be3cec78-1c3d-4792-b317-ca4582abe649.png",
-        "/lovable-uploads/e87baef5-3b6c-4561-860a-93f3727d01ba.png",
+        "../src/assets/be3cec78-1c3d-4792-b317-ca4582abe649.png",
+        "../src/assets/e87baef5-3b6c-4561-860a-93f3727d01ba.png",
       ];
       
       let loadedCount = 0;
