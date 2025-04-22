@@ -36,7 +36,7 @@ const ServiceCard = ({ icon, title, description, delay }: ServiceCardProps) => {
 
   return (
     <div ref={cardRef} className="service-card bg-white shadow-lg reveal-up">
-      <div className="mb-5 inline-flex p-3 rounded-lg bg-azplumbing-yellow/20 text-azplumbing-yellow">
+      <div className="mb-5 inline-flex p-3 rounded-lg bg-azplumbing-yellow text-azplumbing-yellow">
         {icon}
       </div>
       <h3 className="text-xl font-bold mb-3 text-azplumbing-blue">{title}</h3>
@@ -86,7 +86,7 @@ const Services = () => {
         <div className="text-center mb-16">
           <h2
             ref={headingRef}
-            className="text-4xl md:text-5xl font-bold text-azplumbing-blue reveal-up"
+            className="text-4xl md:text-5xl font-bold text-white reveal-up"
           >
             Our <span className="text-azplumbing-yellow">Services</span>
           </h2>
@@ -95,21 +95,21 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <ServiceCard
-            icon={<Wrench size={28} />}
+            icon={<Wrench size={28} color="white" />}
             title="Plumbing Repairs"
             description="Our experienced plumbers can handle all types of plumbing repairs, from fixing leaky pipes to toilet flush systems. We use the latest tools and techniques to ensure the job is done right the first time."
             delay={100}
           />
 
           <ServiceCard
-            icon={<Flame size={28} />}
+            icon={<Flame size={28} color="white" />}
             title="Boiler Installation"
             description="Need a new boiler? Our team can install high-quality boilers that are energy-efficient and reliable. We will assess your heating needs and recommend the best boiler for your home or business."
             delay={300}
           />
 
           <ServiceCard
-            icon={<Bath size={28} />}
+            icon={<Bath size={28} color="white" />}
             title="Bathroom Renovation"
             description="Looking to renovate your bathroom? We offer complete bathroom renovation services, including plumbing installation, fixture replacement, and tiling. Transform your bathroom into a beautiful and functional space with our help."
             delay={500}
@@ -117,7 +117,7 @@ const Services = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-lg mb-6">
+          <p className="text-lg mb-6 text-white">
             Follow the link below to take you to a catalogue of bathrooms
             completed by the team
           </p>
@@ -127,8 +127,6 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-azplumbing-yellow/10 rounded-full translate-y-1/2 -translate-x-1/3"></div>
     </section>
   );
 };

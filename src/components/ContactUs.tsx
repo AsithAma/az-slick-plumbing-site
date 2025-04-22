@@ -66,13 +66,13 @@ const ContactUs = () => {
     <section 
       id="contact" 
       ref={sectionRef}
-      className="py-20 bg-azplumbing-gray/30"
+      className="py-20 bg-gray"
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 
             ref={titleRef}
-            className="text-4xl md:text-5xl font-bold text-azplumbing-blue reveal-up"
+            className="text-4xl md:text-5xl font-bold text-white reveal-up"
           >
             Contact <span className="text-azplumbing-yellow">Us</span>
           </h2>

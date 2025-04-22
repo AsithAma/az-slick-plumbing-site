@@ -1,6 +1,5 @@
-
-import { Phone, Mail, MapPin } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Phone, Mail, MapPin } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const MapSection = () => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -10,11 +9,11 @@ const MapSection = () => {
     const initMap = () => {
       if (mapRef.current) {
         // A-Z Heating & Plumbing location coordinates
-        const location = { lat: 51.5179, lng: -3.1925 }; // Cardiff coordinates
+        const location = { lat: 51.529736, lng: -3.189622 }; // Cardiff coordinates
         const mapOptions = {
           center: location,
           zoom: 15,
-          mapTypeId: window.google.maps.MapTypeId.ROADMAP
+          mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         };
 
         // Create the map
@@ -24,15 +23,15 @@ const MapSection = () => {
         new window.google.maps.Marker({
           position: location,
           map: map,
-          title: 'A-Z Heating & Plumbing'
+          title: "A-Z Heating & Plumbing",
         });
       }
     };
 
     // Load Google Maps API with a valid API key
     // Note: Using a placeholder API key - this should be replaced with a valid one
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGoogleMap`;
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyClWx_Hx-h_VhWXhmmYTCB14blUIK8Rra0&libraries=places&callback=initGoogleMap`;
     script.async = true;
     script.defer = true;
     window.initGoogleMap = initMap;
@@ -48,19 +47,19 @@ const MapSection = () => {
   }, []);
 
   return (
-    <section className="relative py-12 md:py-0">
+    <section className="relative py-12 md:py-0 bg-azplumbing-blue">
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Map Container */}
-        <div className="h-[400px] md:h-[600px] relative">
-          <div 
-            ref={mapRef} 
-            className="w-full h-full"
+        <div className="h-[400px] md:h-[600px] p-8 relative">
+          <div
+            ref={mapRef}
+            className="w-full h-full rounded-3xl"
             aria-label="Google Map showing A-Z Heating & Plumbing location"
           ></div>
         </div>
 
         {/* Contact Information */}
-        <div className="bg-azplumbing-blue text-white flex items-center">
+        <div className="text-white flex items-center">
           <div className="p-12 lg:p-20">
             <h3 className="text-3xl font-bold mb-8 relative">
               <span className="text-azplumbing-yellow">Find</span> Us
@@ -69,23 +68,41 @@ const MapSection = () => {
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <MapPin size={24} className="text-azplumbing-yellow mt-1 flex-shrink-0" />
+                <MapPin
+                  size={24}
+                  className="text-azplumbing-yellow mt-1 flex-shrink-0"
+                />
                 <p className="text-lg">
-                  A-Z Heating & Plumbing<br />
+                  A-Z Heating & Plumbing
+                  <br />
                   Heol Hir, Llanishen, Cardiff CF14 5AA, UK
                 </p>
               </div>
 
               <div className="flex items-center gap-4">
-                <Phone size={24} className="text-azplumbing-yellow flex-shrink-0" />
-                <a href="tel:07912555608" className="text-lg hover:text-azplumbing-yellow transition-colors">
+                <Phone
+                  size={24}
+                  className="text-azplumbing-yellow flex-shrink-0"
+                />
+                <a
+                  href="https://wa.me/447912555608"
+                  className="text-lg hover:text-azplumbing-yellow transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   07912 555608
                 </a>
               </div>
 
               <div className="flex items-center gap-4">
-                <Mail size={24} className="text-azplumbing-yellow flex-shrink-0" />
-                <a href="mailto:info@azheatingplumbing.co.uk" className="text-lg hover:text-azplumbing-yellow transition-colors">
+                <Mail
+                  size={24}
+                  className="text-azplumbing-yellow flex-shrink-0"
+                />
+                <a
+                  href="mailto:info@azheatingplumbing.co.uk"
+                  className="text-lg hover:text-azplumbing-yellow transition-colors"
+                >
                   info@azheatingplumbing.co.uk
                 </a>
               </div>
