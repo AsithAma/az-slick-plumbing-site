@@ -1,73 +1,118 @@
-# Welcome to your Lovable project
+# A-Z Slick Plumbing Website
 
-## Project info
+A modern, responsive website for A-Z Slick Plumbing services built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/da7a87e2-5d23-4c4e-a281-0511ee025fc2
+## Features
 
-## How can I edit this code?
+- **Responsive Design**: Mobile-first approach with beautiful animations
+- **Modern UI**: Built with shadcn/ui components and Tailwind CSS
+- **Contact Integration**: Google Maps integration and contact forms
+- **Service Showcase**: Professional presentation of plumbing services
+- **Gallery**: Image gallery showcasing previous work
+- **FAQ Section**: Common questions and answers
+- **SEO Optimized**: Proper meta tags and structure
 
-There are several ways of editing your application.
+## Technologies Used
 
-**Use Lovable**
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Beautiful, accessible UI components
+- **React Router** - Client-side routing
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/da7a87e2-5d23-4c4e-a281-0511ee025fc2) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js (version 16 or higher)
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd az-slick-plumbing-site
+```
 
-Follow these steps:
+2. Install dependencies:
+```bash
+npm install
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # React components
+│   ├── ui/            # shadcn/ui components
+│   ├── About.tsx      # About section
+│   ├── ContactUs.tsx  # Contact form
+│   ├── FAQ.tsx        # FAQ section
+│   ├── Footer.tsx     # Footer component
+│   ├── Gallery.tsx    # Image gallery
+│   ├── Hero.tsx       # Hero section
+│   ├── MapSection.tsx # Google Maps integration
+│   ├── Navbar.tsx     # Navigation
+│   └── Services.tsx   # Services showcase
+├── pages/             # Page components
+├── assets/            # Images and static assets
+├── hooks/             # Custom React hooks
+└── lib/               # Utility functions
+```
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project can be deployed to any static hosting service:
 
-## How can I deploy this project?
+- **Vercel**: Connect your GitHub repo and deploy automatically
+- **Netlify**: Drag and drop the `dist` folder after building
+- **GitHub Pages**: Use GitHub Actions for automatic deployment
 
-Simply open [Lovable](https://lovable.dev/projects/da7a87e2-5d23-4c4e-a281-0511ee025fc2) and click on Share -> Publish.
+### Build for Production
 
-## Can I connect a custom domain to my Lovable project?
+```bash
+npm run build
+```
 
-Yes it is!
+The built files will be in the `dist` directory, ready for deployment.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Customization
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Colors
+The project uses a custom color scheme defined in `tailwind.config.ts`:
+- Primary blue: `azplumbing-blue`
+- Accent yellow: `azplumbing-yellow`
+
+### Content
+Update the content in the respective component files to match your business information.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For support or questions about this project, please contact the development team.

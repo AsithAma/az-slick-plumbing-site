@@ -25,8 +25,8 @@ const Index = () => {
       // We'll let the Gallery component handle its own preloading
       // This is just for critical above-the-fold images
       const criticalImages = [
-        "../src/assets/be3cec78-1c3d-4792-b317-ca4582abe649.png",
-        "../src/assets/e87baef5-3b6c-4561-860a-93f3727d01ba.png",
+        "/be3cec78-1c3d-4792-b317-ca4582abe649.png",
+        "/e87baef5-3b6c-4561-860a-93f3727d01ba.png",
       ];
       
       let loadedCount = 0;
@@ -94,7 +94,7 @@ const Index = () => {
       
       {/* Back to top button */}
       <a 
-        href="#home" 
+        href="home" 
         className="fixed bottom-8 right-8 bg-azplumbing-yellow text-azplumbing-blue p-3 rounded-full shadow-lg hover:bg-azplumbing-blue hover:text-azplumbing-yellow transition-all duration-300 z-20"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-up">

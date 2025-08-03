@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A-Z Heating & Plumbing</title>
-    <meta name="description" content="Project by Hiveion" />
-    <link rel="icon" href="../src/assets/favicon.ico" type="image/x-icon">
-  </head>
 
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <!-- <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script> -->
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A-Z Heating & Plumbing</title>
+  <meta name="description" content="Project by Hiveion" />
+      <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnT-xttoavCDLG2NS336DC_Ml5syJ0cek",
+      authDomain: "a-z-slick-plumbing-website.firebaseapp.com",
+      projectId: "a-z-slick-plumbing-website",
+      storageBucket: "a-z-slick-plumbing-website.firebasestorage.app",
+      messagingSenderId: "65874153290",
+      appId: "1:65874153290:web:3bb49ea60b32ed0b677bb3",
+      measurementId: "G-95KDTZ7LDH"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+</body>
+
 </html>

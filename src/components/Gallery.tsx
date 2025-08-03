@@ -6,18 +6,18 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const images = [
-    "../src/assets/be3cec78-1c3d-4792-b317-ca4582abe649.png",
-    "../src/assets/e87baef5-3b6c-4561-860a-93f3727d01ba.png",
-    "../src/assets/3116340c-16c6-4172-ae6a-63fe9de1e6e4.png",
-    "../src/assets/3a2b41bf-c025-4b23-b226-33d0cc084b61.png",
-    "../src/assets/4b3e1340-f545-48d0-bf85-6ced937e6cc7.png",
-    "../src/assets/af850c21-57c9-47d4-8f45-223ada4b44b2.png",
-    "../src/assets/345e8800-accb-4edc-8a4e-750efd337c10.png",
-    "../src/assets/5ff362dc-38db-4d62-99bf-1632835ede72.png",
-    "../src/assets/3f807f73-366b-40cb-964a-e41da48b2065.png",
-    "../src/assets/c25c2d3f-1d25-464b-9f99-dbe384fe4369.png",
-    "../src/assets/e6747307-a130-4390-9729-b533b962e66c.png",
-    "../src/assets/025eb597-dc1b-4d01-8a54-738f77eeb1bd.png"
+    "/be3cec78-1c3d-4792-b317-ca4582abe649.png",
+    "/e87baef5-3b6c-4561-860a-93f3727d01ba.png",
+    "/3116340c-16c6-4172-ae6a-63fe9de1e6e4.png",
+    "/3a2b41bf-c025-4b23-b226-33d0cc084b61.png",
+    "/4b3e1340-f545-48d0-bf85-6ced937e6cc7.png",
+    "/af850c21-57c9-47d4-8f45-223ada4b44b2.png",
+    "/345e8800-accb-4edc-8a4e-750efd337c10.png",
+    "/5ff362dc-38db-4d62-99bf-1632835ede72.png",
+    "/3f807f73-366b-40cb-964a-e41da48b2065.png",
+    "/c25c2d3f-1d25-464b-9f99-dbe384fe4369.png",
+    "/e6747307-a130-4390-9729-b533b962e66c.png",
+    "/025eb597-dc1b-4d01-8a54-738f77eeb1bd.png"
   ];
 
   const openLightbox = (index: number) => {
